@@ -10,7 +10,8 @@
 
     id<MTLRenderPipelineState> _pipelineState;
     id<MTLCommandQueue> _commandQueue;
-
+    id<MTLBuffer> _uniformBuffer;
+    
     vector_uint2 _viewportSize;
 }
 
@@ -38,6 +39,10 @@
         NSAssert(_pipelineState, @"Failed to create pipeline state: %@", error);
 
         _commandQueue = [_device newCommandQueue];
+        
+        _uniformBuffer = [_device newBufferWithLength:sizeof(vector_float2)
+                                              options:MTLResourceStorageModeShared];
+
     }
 
     return self;
@@ -46,10 +51,13 @@
 - (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size {
     _viewportSize.x = size.width;
     _viewportSize.y = size.height;
+
+    vector_float2 viewportSize = {(float)size.width, (float)size.height};
+    memcpy(_uniformBuffer.contents, &viewportSize, sizeof(vector_float2));
 }
 
-- (void)drawInMTKView:(nonnull MTKView *)view
-{
+
+- (void)drawInMTKView:(nonnull MTKView *)view {
     id<MTLCommandBuffer> commandBuffer = [_commandQueue commandBuffer];
     commandBuffer.label = @"pathtracer";
 
@@ -62,6 +70,8 @@
 
         [renderEncoder setViewport:(MTLViewport){0.0, 0.0, _viewportSize.x, _viewportSize.y, 0.0, 1.0 }];
         [renderEncoder setRenderPipelineState:_pipelineState];
+
+        [renderEncoder setFragmentBuffer:_uniformBuffer offset:0 atIndex:0];
 
         [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle
                           vertexStart:0

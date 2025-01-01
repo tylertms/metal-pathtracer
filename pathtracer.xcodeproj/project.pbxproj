@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F3095852D24D4A4001EDDB2 /* Collision.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2F3095842D24D3E2001EDDB2 /* Collision.metal */; };
 		3A1F1B3D1F033827001622B3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A35329C1E99974500C194AD /* ViewController.m */; };
 		3A1F1B3E1F033846001622B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3532931E99974500C194AD /* main.m */; };
 		3A3532CC1E99974500C194AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A3532CA1E99974500C194AD /* Main.storyboard */; };
@@ -15,6 +16,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F3095832D24CE8F001EDDB2 /* Collision.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Collision.h; sourceTree = "<group>"; };
+		2F3095842D24D3E2001EDDB2 /* Collision.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Collision.metal; sourceTree = "<group>"; };
+		2F3095902D24D5A8001EDDB2 /* Ray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ray.h; sourceTree = "<group>"; };
+		2F3095912D24D856001EDDB2 /* Sphere.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sphere.h; sourceTree = "<group>"; };
 		3A3532841E99974500C194AD /* Renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
 		3A3532851E99974500C194AD /* Renderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Renderer.m; sourceTree = "<group>"; };
 		3A3532861E99974500C194AD /* ShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
@@ -22,11 +27,9 @@
 		3A3532931E99974500C194AD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A35329B1E99974500C194AD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		3A35329C1E99974500C194AD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		3A3532BF1E99974500C194AD /* HelloTriangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTriangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A3532BF1E99974500C194AD /* pathtracer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pathtracer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A3532CB1E99974500C194AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A3532CD1E99974500C194AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3ACD21331EAE60D2000D1DED /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		3ACD21341EAE60D2000D1DED /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +52,25 @@
 			path = Shader;
 			sourceTree = "<group>";
 		};
+		2F30957E2D24CE25001EDDB2 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				2F30957F2D24CE3D001EDDB2 /* Objects */,
+				2F3095832D24CE8F001EDDB2 /* Collision.h */,
+				2F3095842D24D3E2001EDDB2 /* Collision.metal */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		2F30957F2D24CE3D001EDDB2 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				2F3095902D24D5A8001EDDB2 /* Ray.h */,
+				2F3095912D24D856001EDDB2 /* Sphere.h */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
 		3A1F1B361F0336DB001622B3 /* Window */ = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +87,7 @@
 				3A3532831E99974500C194AD /* Renderer */,
 				3A3532911E99974500C194AD /* Application */,
 				3A3532901E99974500C194AD /* Products */,
+				2F30957E2D24CE25001EDDB2 /* Scene */,
 				2F30957D2D24C84D001EDDB2 /* Shader */,
 			);
 			sourceTree = "<group>";
@@ -81,7 +104,7 @@
 		3A3532901E99974500C194AD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3A3532BF1E99974500C194AD /* HelloTriangle.app */,
+				3A3532BF1E99974500C194AD /* pathtracer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -89,8 +112,6 @@
 		3A3532911E99974500C194AD /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				3ACD21331EAE60D2000D1DED /* AppDelegate.h */,
-				3ACD21341EAE60D2000D1DED /* AppDelegate.m */,
 				3A35329B1E99974500C194AD /* ViewController.h */,
 				3A35329C1E99974500C194AD /* ViewController.m */,
 				3A3532931E99974500C194AD /* main.m */,
@@ -115,7 +136,7 @@
 			);
 			name = pathtracer;
 			productName = macOS;
-			productReference = 3A3532BF1E99974500C194AD /* HelloTriangle.app */;
+			productReference = 3A3532BF1E99974500C194AD /* pathtracer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -168,6 +189,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F3095852D24D4A4001EDDB2 /* Collision.metal in Sources */,
 				3A1F1B3D1F033827001622B3 /* ViewController.m in Sources */,
 				63E77A1A1ED205A200E1E542 /* Shaders.metal in Sources */,
 				3A1F1B3E1F033846001622B3 /* main.m in Sources */,
@@ -241,7 +263,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = HelloTriangle;
+				PRODUCT_NAME = pathtracer;
 			};
 			name = Debug;
 		};
@@ -290,7 +312,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = HelloTriangle;
+				PRODUCT_NAME = pathtracer;
 			};
 			name = Release;
 		};
@@ -306,13 +328,13 @@
 					"$(inherited)",
 					TARGET_MACOS,
 				);
-				INFOPLIST_FILE = Application/macOS/Info.plist;
+				INFOPLIST_FILE = Window/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tiller.pathtracer;
-				PRODUCT_NAME = HelloTriangle;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tylertms.pathtracer;
+				PRODUCT_NAME = pathtracer;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 			};
@@ -327,12 +349,12 @@
 				DEVELOPMENT_TEAM = 7ABT9UL8L8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = TARGET_MACOS;
-				INFOPLIST_FILE = Application/macOS/Info.plist;
+				INFOPLIST_FILE = Window/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tiller.pathtracer;
-				PRODUCT_NAME = HelloTriangle;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tylertms.pathtracer;
+				PRODUCT_NAME = pathtracer;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 			};
