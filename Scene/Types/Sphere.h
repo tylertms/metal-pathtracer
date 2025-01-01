@@ -9,9 +9,13 @@
 #ifndef Sphere_h
 #define Sphere_h
 
+#include "Material.hpp"
+
 typedef struct {
-    float3 center;
+    vector_float3 center;
     float radius;
+    Material material;
 } Sphere;
+
 
 #endif /* Sphere_h */

@@ -10,8 +10,8 @@
 #define Ray_h
 
 typedef struct {
-    float3 origin;
-    float3 dir;
+    vector_float3 origin;
+    vector_float3 dir;
 } Ray;
 
 #endif /* Ray_h */

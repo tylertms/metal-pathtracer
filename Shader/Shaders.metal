@@ -1,19 +1,15 @@
 #include <metal_stdlib>
-
 using namespace metal;
 
-#include "ShaderTypes.h"
 #include "../Scene/Collision.h"
-
-#define SCALE 200
+#include "../Scene/Types/Uniforms.h"
+#include "../Scene/Random.h"
+#include "../Scene/Trace.h"
+#include "../Application/Config.h"
 
 struct RasterizerData {
     float4 position [[position]];
     float4 color;
-};
-
-struct Uniforms {
-    float2 viewportSize;
 };
 
 vertex RasterizerData vertexShader(uint vertexID [[vertex_id]]) {
@@ -31,22 +27,30 @@ vertex RasterizerData vertexShader(uint vertexID [[vertex_id]]) {
     return out;
 }
 
-fragment float4 fragmentShader(RasterizerData in [[stage_in]], constant Uniforms &uniforms [[buffer(0)]]) {
-    float2 scaled = 2 * in.position.xy / SCALE;
-    float3 pixelPoint = float3(scaled.x - uniforms.viewportSize.x / (SCALE),
-                               scaled.y - uniforms.viewportSize.y / (SCALE),
-                               -4);
+fragment float4 fragmentShader(
+   RasterizerData in [[stage_in]],
+   constant Uniforms &uniforms [[buffer(0)]],
+   device const Sphere *spheres [[buffer(1)]]
+) {
+    
+    float2 scaled = 2 * in.position.xy / uniforms.scale;
+    float3 pixelPoint = float3(scaled.x - uniforms.viewportSize.x / (uniforms.scale),
+                               scaled.y - uniforms.viewportSize.y / (uniforms.scale),
+                               4);
     
     Ray ray;
     ray.origin = float3(0, 0, -10);
     ray.dir = normalize(pixelPoint - ray.origin);
     
-    Sphere sphere;
-    sphere.center = float3(0, 0, 0);
-    sphere.radius = 1;
+    uint randomInput = in.position.y * uniforms.viewportSize.x + in.position.x;
     
-    Collision c = raySphereCollision(ray, sphere);
+    float3 totalLight = 0;
+    for(int i = 0; i < RAYS_PER_PIXEL; i++) {
+        totalLight += Trace(ray, spheres, &randomInput);
+    }
     
-    return float4(c.didCollide, c.didCollide, c.didCollide, 1);
+    float3 pixelColor = totalLight / RAYS_PER_PIXEL;
+
+    return float4(pixelColor, 1);
 }
 
